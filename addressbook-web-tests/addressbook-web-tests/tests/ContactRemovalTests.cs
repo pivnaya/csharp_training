@@ -3,7 +3,7 @@
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactRemovalTests : TestBase
+    public class ContactRemovalTests : AuthTestBase
     {
         [Test]
         public void RemoveContactFromContactPageTest()
@@ -13,7 +13,7 @@ namespace WebAddressbookTests
 
         [Test]
         public void RemoveContactFromHomePageTest()
-        {
+        {;
             app.Contacts.RemoveFromHomePage(1);
         }
     }
