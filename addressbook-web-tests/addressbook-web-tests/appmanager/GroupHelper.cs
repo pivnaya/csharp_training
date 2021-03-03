@@ -87,5 +87,10 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("edit")).Click();
             return this;
         }
+
+        public bool IsGroupPresent()
+        {
+            return IsElementPresent(By.CssSelector("span.group"));
+        }
     }
 }

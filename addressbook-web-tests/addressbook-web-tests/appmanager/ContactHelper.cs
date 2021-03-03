@@ -14,6 +14,7 @@ namespace WebAddressbookTests
             InitContactCreation();
             FillContactForm(new ContactData("Vasya", "Pupkin"));
             SubmitContactCreation();
+            manager.Navigator.GoToHomePage();
             return this;
         }
 
@@ -84,6 +85,11 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
             return this;
+        }
+
+        public bool IsContactPresent()
+        {
+            return IsElementPresent(By.XPath("//tr[@name='entry']"));
         }
     }
 }

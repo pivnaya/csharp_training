@@ -12,6 +12,10 @@ namespace WebAddressbookTests
             newData.Header = "newtestheader";
             newData.Footer = "newtestfooter";
 
+            if (!app.Groups.IsGroupPresent())
+            {
+                app.Groups.Create(newData);
+            }
             app.Groups.Modify(1, newData);
         }
     }
