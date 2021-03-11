@@ -1,48 +1,48 @@
-﻿namespace WebAddressbookTests
+﻿using System;
+
+namespace WebAddressbookTests
 {
-    public class GroupData
+    public class GroupData : IEquatable<GroupData>, IComparable<GroupData>
     {
-        private string name;
-        private string header = "";
-        private string footer = "";
+        public string Name { get; set; }
+        public string Header { get; set; } = "";
+        public string Footer { get; set; } = "";
 
         public GroupData(string name)
         {
-            this.name = name;
+            Name = name;
         }
 
-        public string Name
+        public bool Equals(GroupData other)
         {
-            get
+            if (ReferenceEquals(other, null))
             {
-                return name;
+                return false;
             }
-            set
+            if (ReferenceEquals(this, other))
             {
-                name = value;
+                return true;
             }
+            return Name == other.Name;
         }
-        public string Header
+
+        public override int GetHashCode()
         {
-            get
-            {
-                return header;
-            }
-            set
-            {
-                header = value;
-            }
+            return Name.GetHashCode();
         }
-        public string Footer
+
+        public override string ToString()
         {
-            get
+            return "name: " + Name;
+        }
+
+        public int CompareTo(GroupData other)
+        {
+            if (ReferenceEquals(other, null))
             {
-                return footer;
+                return 1;
             }
-            set
-            {
-                footer = value;
-            }
+            return Name.CompareTo(other.Name);
         }
     }
 }
