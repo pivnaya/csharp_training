@@ -5,8 +5,12 @@ namespace WebAddressbookTests
     public class GroupData : IEquatable<GroupData>, IComparable<GroupData>
     {
         public string Name { get; set; }
+
         public string Header { get; set; } = "";
+
         public string Footer { get; set; } = "";
+
+        public string Id { get; set; }
 
         public GroupData(string name)
         {

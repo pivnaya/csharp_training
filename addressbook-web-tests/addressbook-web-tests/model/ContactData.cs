@@ -8,6 +8,8 @@ namespace WebAddressbookTests
 
         public string Lastname { get; set; }
 
+        public string Id { get; set; }
+
         public ContactData(string firstname, string lastname)
         {
             Firstname = firstname;

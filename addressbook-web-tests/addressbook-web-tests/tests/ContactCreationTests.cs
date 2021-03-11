@@ -9,11 +9,13 @@ namespace WebAddressbookTests
         [Test]
         public void ContactCreationTest()
         {
-            List<ContactData> oldContacts = app.Contacts.GetContactsList();
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
 
             app.Contacts.Create();
 
-            List<ContactData> newContacts = app.Contacts.GetContactsList();
+            Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
+
+            List<ContactData> newContacts = app.Contacts.GetContactList();
             oldContacts.Add(new ContactData("Vasya", "Pupkin"));
             oldContacts.Sort();
             newContacts.Sort();
