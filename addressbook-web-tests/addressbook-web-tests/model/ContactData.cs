@@ -10,6 +10,12 @@ namespace WebAddressbookTests
 
         private string allEmails;
 
+        private string fullInfo;
+
+        private string birthday;
+
+        private string anniversary;
+
         public string Firstname { get; set; }
 
         public string Lastname { get; set; }
@@ -31,6 +37,34 @@ namespace WebAddressbookTests
         public string Email2 { get; set; }
 
         public string Email3 { get; set; }
+
+        public string MiddleName { get; internal set; }
+
+        public string Company { get; internal set; }
+
+        public string Nickname { get; internal set; }
+
+        public string Title { get; internal set; }
+
+        public string Fax { get; internal set; }
+
+        public string Homepage { get; internal set; }
+
+        public string BirthDay { get; internal set; }
+
+        public string BirthMonth { get; internal set; }
+
+        public string BirthYear { get; internal set; }
+
+        public string AnniversaryDay { get; internal set; }
+
+        public string AnniversaryMonth { get; internal set; }
+
+        public string AnniversaryYear { get; internal set; }
+
+        public string SecondAddress { get; internal set; }
+
+        public string Comment { get; internal set; }
 
         public string AllPhones
         {
@@ -88,6 +122,102 @@ namespace WebAddressbookTests
             return email + "\r\n";
         }
 
+        public string FormatValue(string prefix, string value, string suffix)
+        {
+            if (value == null || value == "")
+            {
+                return "";
+            }
+            return prefix + value + suffix;
+        }
+
+        public string FormatValue(string value, string suffix)
+        {
+            return FormatValue("", value, suffix);
+        }
+
+        public string FormatYear(string value)
+        {
+            if (value == null || value == "")
+            {
+                return "";
+            }
+            int diff = DateTime.Now.Year - Int32.Parse(value);
+            return $"{value} ({diff})";
+        }
+
+        public string FullInfo
+        {
+            get
+            {
+                if (fullInfo != null)
+                {
+                    return fullInfo;
+                }
+                else
+                {
+                    return FormatValue(Firstname, " ") + FormatValue(MiddleName, " ") + FormatValue(Lastname, "\r\n") +
+                        FormatValue(Nickname, "\r\n") +
+                        FormatValue(Title, "\r\n") +
+                        FormatValue(Company, "\r\n") +
+                        FormatValue(Address, "\r\n") +
+                        FormatValue("H: ", HomePhone, "\r\n") +
+                        FormatValue("M: ", MobilePhone, "\r\n") +
+                        FormatValue("W: ", WorkPhone, "\r\n") +
+                        FormatValue("F: ",  Fax, "\r\n") +
+                        FormatValue(AllEmails, "\r\n") +
+                        FormatValue("Homepage:\r\n", Homepage, "\r\n") +
+                        FormatValue("Birthday ", Birthday, "\r\n") +
+                        FormatValue("Anniversary ", Anniversary, "\r\n") +
+                        FormatValue(SecondAddress, "\r\n") +
+                        FormatValue("P: ", SecondHomePhone, "\r\n") +
+                        FormatValue(Comment, "");
+                }
+            }
+            set
+            {
+                fullInfo = value;
+            }
+        }
+
+        public string Birthday
+        {
+            get
+            {
+                if (birthday != null)
+                {
+                    return birthday;
+                }
+                else
+                {
+                    return (FormatValue(BirthDay, ". ") + FormatValue(BirthMonth, " ") + FormatYear(BirthYear)).Trim();
+                }
+            }
+            set
+            {
+                birthday = value;
+            }
+        }
+
+        public string Anniversary
+        {
+            get
+            {
+                if (anniversary != null)
+                {
+                    return anniversary;
+                }
+                else
+                {
+                    return (FormatValue(AnniversaryDay, ". ") + FormatValue(AnniversaryMonth, " ") + FormatYear(AnniversaryYear)).Trim();
+                }
+            }
+            set
+            {
+                anniversary = value;
+            }
+        }
+
         public ContactData(string firstname, string lastname)
         {
             Firstname = firstname;
@@ -133,8 +263,5 @@ namespace WebAddressbookTests
 
             return Firstname.CompareTo(other.Firstname);
         }
-
-
-
     }
 }
