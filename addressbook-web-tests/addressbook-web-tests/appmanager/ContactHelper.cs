@@ -11,10 +11,10 @@ namespace WebAddressbookTests
         {
         }
 
-        internal ContactHelper Create()
+        internal ContactHelper Create(ContactData contact)
         {
             InitContactCreation();
-            FillContactForm(new ContactData("Vasya", "Pupkin"));
+            FillContactForm(contact);
             SubmitContactCreation();
             manager.Navigator.GoToHomePage();
             return this;

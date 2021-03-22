@@ -5,6 +5,15 @@ namespace WebAddressbookTests
     [TestFixture]
     public class ContactInformationTests : AuthTestBase
     {
+        [SetUp]
+        public void TestSetUp()
+        {
+            if (!app.Contacts.IsContactPresent())
+            {
+                app.Contacts.Create(new ContactData("Petya", "Stepkin"));
+            }
+        }
+
         [Test]
         public void ContactInformationFromHomePageTest()
         {

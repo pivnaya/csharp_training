@@ -13,7 +13,7 @@ namespace WebAddressbookTests
 
             if (!app.Contacts.IsContactPresent())
             {
-                app.Contacts.Create();
+                app.Contacts.Create(newData);
             }
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();

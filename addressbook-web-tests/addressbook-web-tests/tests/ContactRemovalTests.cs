@@ -6,14 +6,18 @@ namespace WebAddressbookTests
     [TestFixture]
     public class ContactRemovalTests : AuthTestBase
     {
-        [Test]
-        public void RemoveContactFromContactPageTest()
+        [SetUp]
+        public void TestSetUp()
         {
             if (!app.Contacts.IsContactPresent())
             {
-                app.Contacts.Create();
+                app.Contacts.Create(new ContactData("Petya", "Stepkin"));
             }
+        }
 
+        [Test]
+        public void RemoveContactFromContactPageTest()
+        {
             List<ContactData> oldContacts = app.Contacts.GetContactList();
 
             app.Contacts.RemoveFromContactPage(0);
@@ -35,11 +39,6 @@ namespace WebAddressbookTests
         [Test]
         public void RemoveContactFromHomePageTest()
         {
-            if (!app.Contacts.IsContactPresent())
-            {
-                app.Contacts.Create();
-            }
-
             List<ContactData> oldContacts = app.Contacts.GetContactList();
 
             app.Contacts.RemoveFromHomePage(0);
