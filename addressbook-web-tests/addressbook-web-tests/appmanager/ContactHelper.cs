@@ -103,8 +103,7 @@ namespace WebAddressbookTests
         {
             manager.Navigator.GoToHomePage();
             ViewContactDetails(index);
-            string text = driver.FindElement(By.CssSelector("div #content")).Text;
-            return Regex.Replace(text, "\r\n\r\n", "\r\n");
+            return driver.FindElement(By.CssSelector("div #content")).Text;
         }
 
         public ContactData GetContactInformationFromTable(int index)

@@ -128,7 +128,7 @@ namespace WebAddressbookTests
             {
                 return "";
             }
-            return prefix + value + suffix;
+            return (prefix + value.Trim()).Trim() + suffix;
         }
 
         public string FormatValue(string value, string suffix)
@@ -156,22 +156,39 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return FormatValue(Firstname, " ") + FormatValue(MiddleName, " ") + FormatValue(Lastname, "\r\n") +
-                        FormatValue(Nickname, "\r\n") +
-                        FormatValue(Title, "\r\n") +
-                        FormatValue(Company, "\r\n") +
-                        FormatValue(Address, "\r\n") +
-                        FormatValue("H: ", HomePhone, "\r\n") +
-                        FormatValue("M: ", MobilePhone, "\r\n") +
-                        FormatValue("W: ", WorkPhone, "\r\n") +
-                        FormatValue("F: ",  Fax, "\r\n") +
-                        FormatValue(AllEmails, "\r\n") +
-                        FormatValue("Homepage:\r\n", Homepage, "\r\n") +
-                        FormatValue("Birthday ", Birthday, "\r\n") +
-                        FormatValue("Anniversary ", Anniversary, "\r\n") +
-                        FormatValue(SecondAddress, "\r\n") +
-                        FormatValue("P: ", SecondHomePhone, "\r\n") +
-                        FormatValue(Comment, "");
+                    return (
+                        FormatValue(
+                            FormatValue(
+                                FormatValue(Firstname, " ") + FormatValue(MiddleName, " ") + FormatValue(Lastname, ""),
+                                "\r\n"
+                            ) +
+                            FormatValue(Nickname, "\r\n") +
+                            FormatValue(Title, "\r\n") +
+                            FormatValue(Company, "\r\n") +
+                            FormatValue(Address, "\r\n"),
+                            "\r\n\r\n"
+                        ) +
+                        FormatValue(
+                            FormatValue("H: ", HomePhone, "\r\n") +
+                            FormatValue("M: ", MobilePhone, "\r\n") +
+                            FormatValue("W: ", WorkPhone, "\r\n") +
+                            FormatValue("F: ", Fax, "\r\n"),
+                            "\r\n\r\n"
+                        ) +
+                        FormatValue(
+                            FormatValue(AllEmails, "\r\n") +
+                            FormatValue("Homepage:\r\n", Homepage, "\r\n"),
+                            "\r\n\r\n"
+                        ) +
+                        FormatValue(
+                            FormatValue("Birthday ", Birthday, "\r\n") +
+                            FormatValue("Anniversary ", Anniversary, "\r\n"),
+                            "\r\n\r\n"
+                        ) +
+                        FormatValue(SecondAddress, "\r\n\r\n") +
+                        FormatValue("P: ", SecondHomePhone, "\r\n\r\n") +
+                        FormatValue(Comment, "")
+                    ).Trim();
                 }
             }
             set
