@@ -38,33 +38,33 @@ namespace WebAddressbookTests
 
         public string Email3 { get; set; }
 
-        public string MiddleName { get; internal set; }
+        public string MiddleName { get; set; }
 
-        public string Company { get; internal set; }
+        public string Company { get; set; }
 
-        public string Nickname { get; internal set; }
+        public string Nickname { get; set; }
 
-        public string Title { get; internal set; }
+        public string Title { get; set; }
 
-        public string Fax { get; internal set; }
+        public string Fax { get; set; }
 
-        public string Homepage { get; internal set; }
+        public string Homepage { get; set; }
 
-        public string BirthDay { get; internal set; }
+        public string BirthDay { get; set; }
 
-        public string BirthMonth { get; internal set; }
+        public string BirthMonth { get; set; }
 
-        public string BirthYear { get; internal set; }
+        public string BirthYear { get; set; }
 
-        public string AnniversaryDay { get; internal set; }
+        public string AnniversaryDay { get; set; }
 
-        public string AnniversaryMonth { get; internal set; }
+        public string AnniversaryMonth { get; set; }
 
-        public string AnniversaryYear { get; internal set; }
+        public string AnniversaryYear { get; set; }
 
-        public string SecondAddress { get; internal set; }
+        public string SecondAddress { get; set; }
 
-        public string Comment { get; internal set; }
+        public string Comment { get; set; }
 
         public string AllPhones
         {
@@ -233,6 +233,10 @@ namespace WebAddressbookTests
             {
                 anniversary = value;
             }
+        }
+
+        public ContactData()
+        {
         }
 
         public ContactData(string firstname, string lastname)
