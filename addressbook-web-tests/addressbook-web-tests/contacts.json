@@ -65,7 +65,7 @@
   },
   {
     "Firstname": "X--6",
-    "Lastname": "A_.I<",
+    "Lastname": "A_.I",
     "Id": null,
     "Address": null,
     "HomePhone": null,
@@ -91,7 +91,7 @@
     "Comment": null,
     "AllPhones": "",
     "AllEmails": "",
-    "FullInfo": "X--6 A_.I<",
+    "FullInfo": "X--6 A_.I",
     "Birthday": "",
     "Anniversary": ""
   }
