@@ -136,6 +136,16 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public ContactHelper Modify(ContactData toBeModified, ContactData newData)
+        {
+            manager.Navigator.GoToHomePage();
+            InitContactModification(toBeModified.Id);
+            FillContactForm(newData);
+            SubmitContactModification();
+            manager.Navigator.GoToHomePage();
+            return this;
+        }
+
         private List<ContactData> contactCache = null;
 
         public int GetContactCount()
@@ -169,10 +179,29 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public ContactHelper RemoveFromContactPage(ContactData contact)
+        {
+            manager.Navigator.GoToHomePage();
+            InitContactModification(contact.Id);
+            RemoveContact();
+            manager.Navigator.GoToHomePage();
+            return this;
+        }
+
         public ContactHelper RemoveFromHomePage(int index)
         {
             manager.Navigator.GoToHomePage();
             SelectContact(index);
+            RemoveContact();
+            driver.SwitchTo().Alert().Accept();
+            manager.Navigator.GoToHomePage();
+            return this;
+        }
+
+        public ContactHelper RemoveFromHomePage(ContactData contact)
+        {
+            manager.Navigator.GoToHomePage();
+            SelectContact(contact.Id);
             RemoveContact();
             driver.SwitchTo().Alert().Accept();
             manager.Navigator.GoToHomePage();
@@ -205,6 +234,12 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public ContactHelper InitContactModification(string contactId)
+        {
+            driver.FindElement(By.XPath($"(//a[@href='edit.php?id={contactId}'])")).Click();
+            return this;
+        }
+
         public ContactHelper SubmitContactModification()
         {
             driver.FindElement(By.XPath("(//input[@value='Update'])")).Click();
@@ -223,6 +258,11 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index+1) + "]")).Click();
             return this;
+        }
+
+        public void SelectContact(string contactId)
+        {
+            driver.FindElement(By.Id(contactId)).Click();
         }
 
         public bool IsContactPresent()
@@ -264,11 +304,6 @@ namespace WebAddressbookTests
         public void SelectGroupToAdd(string name)
         {
             new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(name);
-        }
-
-        public void SelectContact(string contactId)
-        {
-            driver.FindElement(By.Id(contactId)).Click();
         }
 
         public void ClearGroupFilter()

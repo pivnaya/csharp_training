@@ -20,6 +20,9 @@ namespace WebAddressbookTests
         [Column(Name = "group_id"), NotNull, PrimaryKey, Identity]
         public string Id { get; set; }
 
+        [Column(Name = "deprecated"), NotNull]
+        public string Deprecated { get; set; }
+
         public GroupData()
         {
         }
@@ -65,7 +68,8 @@ namespace WebAddressbookTests
         {
             using (AddressBookDB db = new AddressBookDB())
             {
-                return (from g in db.Groups select g).ToList();
+                return (from g in db.Groups.Where(x => x.Deprecated == "00.00.0000 0:00:00") 
+                            select g).ToList();
             }
         }
 

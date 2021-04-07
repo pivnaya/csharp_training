@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactRemovalTests : AuthTestBase
+    public class ContactRemovalTests : ContactTestBase
     {
         [SetUp]
         public void TestSetUp()
@@ -18,14 +18,14 @@ namespace WebAddressbookTests
         [Test]
         public void RemoveContactFromContactPageTest()
         {
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
+            ContactData toBeRemoved = oldContacts[0];
 
-            app.Contacts.RemoveFromContactPage(0);
+            app.Contacts.RemoveFromContactPage(toBeRemoved);
 
             Assert.AreEqual(oldContacts.Count - 1, app.Contacts.GetContactCount());
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
-            ContactData toBeRemoved = oldContacts[0];
+            List<ContactData> newContacts = ContactData.GetAll();
             oldContacts.RemoveAt(0);
 
             Assert.AreEqual(oldContacts, newContacts);
@@ -39,14 +39,14 @@ namespace WebAddressbookTests
         [Test]
         public void RemoveContactFromHomePageTest()
         {
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
+            ContactData toBeRemoved = oldContacts[0];
 
-            app.Contacts.RemoveFromHomePage(0);
+            app.Contacts.RemoveFromHomePage(toBeRemoved);
 
             Assert.AreEqual(oldContacts.Count - 1, app.Contacts.GetContactCount());
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
-            ContactData toBeRemoved = oldContacts[0];
+            List<ContactData> newContacts = ContactData.GetAll();
             oldContacts.RemoveAt(0);
 
             Assert.AreEqual(oldContacts, newContacts);
