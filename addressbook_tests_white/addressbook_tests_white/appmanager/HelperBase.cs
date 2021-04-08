@@ -1,6 +1,4 @@
-﻿
-
-namespace addressbook_tests_white
+﻿namespace addressbook_tests_white
 {
     public class HelperBase
     {
