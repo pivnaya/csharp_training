@@ -32,6 +32,16 @@ namespace addressbook_tests_white
             return list;
         }
 
+        public void Remove(int index)
+        {
+            Window dialog = OpenGroupsDialog();
+            Tree tree = dialog.Get<Tree>("uxAddressTreeView");
+            tree.Nodes[0].Nodes[index].Click();
+            dialog.Get<Button>("uxDeleteAddressButton").Click();
+            dialog.ModalWindow("Delete group").Get<Button>("uxOKAddressButton").Click();
+            CloseGroupsDialog(dialog);
+        }
+
         public void Add(GroupData newGroup)
         {
             Window dialog = OpenGroupsDialog();
