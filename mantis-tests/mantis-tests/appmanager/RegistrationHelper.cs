@@ -19,11 +19,6 @@ namespace mantis_tests
             SubmitPasswordForm();
         }
 
-        public void OpenMainPage()
-        {
-            manager.Driver.Url = "http://localhost/mantisbt-2.25.0/mantisbt-2.25.0/login_page.php";
-        }
-
         public void OpenRegistrationForm()
         {
             driver.FindElement(By.CssSelector("a.back-to-login-link")).Click();

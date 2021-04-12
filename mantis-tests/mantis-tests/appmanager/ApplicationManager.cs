@@ -14,6 +14,9 @@ namespace mantis_tests
         protected FtpHelper ftpHelper;
         protected JamesHelper jamesHelper;
         protected MailHelper mailHelper;
+        protected LoginHelper loginHelper;
+        protected ManagementMenuHelper managementMenuHelper;
+        protected ProjectManagementHelper projectManagementHelper;
 
         private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
 
@@ -26,6 +29,9 @@ namespace mantis_tests
             ftpHelper = new FtpHelper(this);
             jamesHelper = new JamesHelper(this);
             mailHelper = new MailHelper(this);
+            loginHelper = new LoginHelper(this);
+            managementMenuHelper = new ManagementMenuHelper(this);
+            projectManagementHelper = new ProjectManagementHelper(this);
         }
 
         ~ApplicationManager()
@@ -88,6 +94,30 @@ namespace mantis_tests
             get
             {
                 return mailHelper;
+            }
+        }
+
+        public LoginHelper Auth
+        {
+            get
+            {
+                return loginHelper;
+            }
+        }
+
+        public ManagementMenuHelper Menu
+        {
+            get
+            {
+                return managementMenuHelper;
+            }
+        }
+
+        public ProjectManagementHelper Projects
+        {
+            get
+            {
+                return projectManagementHelper;
             }
         }
     }

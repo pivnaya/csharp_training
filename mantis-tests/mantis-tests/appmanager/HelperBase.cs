@@ -42,5 +42,10 @@ namespace mantis_tests
         {
             new WebDriverWait(driver, TimeSpan.FromSeconds(sec)).Until(drv => drv.FindElement(by));
         }
+
+        public void OpenMainPage()
+        {
+            manager.Driver.Url = "http://localhost/mantisbt-2.25.0/mantisbt-2.25.0/login_page.php";
+        }
     }
 }
