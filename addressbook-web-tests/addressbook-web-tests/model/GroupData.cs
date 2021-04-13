@@ -1,4 +1,5 @@
-﻿using LinqToDB.Mapping;
+﻿using LinqToDB;
+using LinqToDB.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -82,6 +83,17 @@ namespace WebAddressbookTests
                                 && p.ContactId == c.Id 
                                 && c.Deprecated == "00.00.0000 0:00:00")
                             select c).Distinct().ToList();
+            }
+        }
+
+        public List<ContactData> GetExceptContacts()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from c in db.Contacts
+                        where !(from gcr in db.GCR.Where(p => p.GroupId == Id) select gcr.ContactId).Contains(c.Id)
+                            && c.Deprecated == "00.00.0000 0:00:00"
+                        select c).Distinct().ToList();
             }
         }
     }
