@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 
 namespace mantis_tests
@@ -10,17 +9,29 @@ namespace mantis_tests
         [Test]
         public void TestProjectCreation()
         {
+            AccountData account = new AccountData()
+            {
+                Name = "administrator",
+                Password = "root"
+            };
+
+            ProjectData project = new ProjectData("testProject");
+
+            List<ProjectData> oldProjects = app.API.GetProjectsList(account);
+
+            ProjectData existingProject = oldProjects.Find(x => x.Name == project.Name);
+
+            if (existingProject != null)
+            {
+                app.API.DeleteProject(account, existingProject);
+                oldProjects.Remove(existingProject);
+            }
+
             app.Auth.LoginByAdmin();
 
-            List<ProjectData> oldProjects = app.Projects.GetProjectsList();
-
-            Random rnd = new Random();
-            int value = rnd.Next(0, 30);
-            ProjectData project = new ProjectData($"testProject{value}");
-            
             app.Projects.Create(project);
 
-            List<ProjectData> newProjects = app.Projects.GetProjectsList();
+            List<ProjectData> newProjects = app.API.GetProjectsList(account);
             oldProjects.Add(project);
             oldProjects.Sort();
             newProjects.Sort();
@@ -28,5 +39,4 @@ namespace mantis_tests
             Assert.AreEqual(oldProjects, newProjects);
         }
     }
-
 }
