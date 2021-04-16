@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace mantis_tests
@@ -26,15 +27,20 @@ namespace mantis_tests
         [Test]
         public void TestAccoutRegistration()
         {
-            Random rnd = new Random();
-            int value = rnd.Next(0, 30);
-
             AccountData account = new AccountData()
             {
-                Name = $"testuser{value}",
+                Name = "user",
                 Password = "password",
-                Email = $"testuser{value}@localhost.localdomain"
+                Email = "user@localhost.localdomain"
             };
+
+            List<AccountData> accounts = app.admin.GetAllAccounts();
+            AccountData existingAcount  = accounts.Find(x => x.Name == account.Name);
+            
+            if (existingAcount != null)
+            {
+                app.admin.DeleteAccount(existingAcount);
+            }
 
             app.James.Delete(account);
             app.James.Add(account);

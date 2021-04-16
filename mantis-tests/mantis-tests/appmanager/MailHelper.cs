@@ -20,6 +20,7 @@ namespace mantis_tests
                     MailMessage mail = pop3.GetMessage(1);
                     string body = mail.Body;
                     pop3.DeleteMessage(1);
+                    pop3.LogOut();
                     return body;
                 }
                 else
